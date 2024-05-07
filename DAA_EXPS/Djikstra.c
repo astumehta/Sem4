@@ -16,7 +16,7 @@ int min(int d[], int visited[])
     }
     return minIndex;
 }
-void prims(int w[SIZE][SIZE])
+void dijkstra(int w[SIZE][SIZE])
 {
     int visited[SIZE];
     int parent[SIZE];
@@ -36,7 +36,7 @@ void prims(int w[SIZE][SIZE])
         {
             if (w[minIndex][j] != 0 && visited[j] == 0 && d[j] > d[minIndex] + w[minIndex][j])
             {
-                d[j] =w[minIndex][j];
+                d[j] = d[minIndex] + w[minIndex][j];
                 parent[j] = minIndex;
             }
         }
@@ -58,5 +58,5 @@ void main()
                          {0, 0, 0, 0, 0, 2, 0, 1, 6},
                          {8, 11, 0, 0, 0, 0, 1, 0, 7},
                          {0, 0, 2, 0, 0, 0, 6, 7, 0}};
-    prims(w);
+    dijkstra(w);
 }
