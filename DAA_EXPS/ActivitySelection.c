@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Function to perform bubble sort on finish times
 void bubbleSortFinishTimes(int start[], int finish[], int n)
 {
     int i, j;
@@ -25,16 +24,11 @@ void bubbleSortFinishTimes(int start[], int finish[], int n)
     }
 }
 
-// Function to perform activity selection
 void activitySelection(int start[], int finish[], int n, int maxFinish)
 {
-    // Initialize variables
+
     int i, count = 0, currentFinish = 0;
-
-    // Sort activities based on finish times
     bubbleSortFinishTimes(start, finish, n);
-
-    // Iterate through activities
     printf("Activity sequence:\n");
     for (i = 0; i < n; i++)
     {
@@ -51,13 +45,12 @@ void activitySelection(int start[], int finish[], int n, int maxFinish)
 
 int main()
 {
-    // Sample data
-    int start[] = {1, 3, 0, 5, 8, 5, 8, 3, 2, 12, 14};
-    int finish[] = {2, 4, 6, 7, 9, 9, 10, 5, 14, 16, 17};
+
+    int start[] = {1, 3, 0, 5, 3, 5, 6, 7, 8, 2, 12};
+    int finish[] = {4, 5, 6, 7, 9, 9, 10, 11, 12, 14, 16};
     int n = sizeof(start) / sizeof(start[0]);
 
-    // Call activitySelection function
-    activitySelection(start, finish, n, 17); // Assuming max finish time as 17
+    activitySelection(start, finish, n, 16);
 
     return 0;
 }
