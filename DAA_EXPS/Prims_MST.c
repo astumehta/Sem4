@@ -34,7 +34,7 @@ void prims(int w[SIZE][SIZE])
         visited[minIndex] = 1;
         for (int j = 0; j < SIZE; j++)
         {
-            if (w[minIndex][j] != 0 && visited[j] == 0 && d[j] > d[minIndex] + w[minIndex][j])
+            if (w[minIndex][j] != 0 && visited[j] == 0 && d[j] > w[minIndex][j])
             {
                 d[j] =w[minIndex][j];
                 parent[j] = minIndex;
