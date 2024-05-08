@@ -1,3 +1,6 @@
+
+// EASY SAME AS ALGO EXACT 
+
 #include <stdio.h>
 #define max 100
 int n, m;
