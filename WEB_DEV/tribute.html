@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribute page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/tribute.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="contents">
+            <header>
+                <div class="header-left">
+                    <h1>APJ Abdul Kalam</h1>
+                    <div class="divider"></div>
+                    <h2>India's Rocket Man</h2>
+                </div>
+                <div class="header-right">
+                    <h3><a href="https://icmai.in/upload/Tribute-DrAPJAbdulKalam.pdf">Know more</a></h3>
+                </div>
+            </header>
+            <main>
+                Avul Pakir Jainulabdeen Abdul Kalam (15 October 1931 – 27 July 2015) was an Indian aerospace scientist who served as the 11th president of India from 2002 to 2007. He was born and raised in Rameswaram, Tamil Nadu, and studied physics and aerospace engineering. He spent the next four decades as a scientist and science administrator, mainly at the Defence Research and Development Organisation (DRDO) and Indian Space Research Organisation (ISRO) and was intimately involved in India's civilian space programme and military missile development efforts. He thus came to be known as the Missile Man of India for his work on the development of ballistic missile and launch vehicle technology. He also played a pivotal organisational, technical, and political role in India's Pokhran-II nuclear tests in 1998, the first since the original nuclear test by India in 1974.
+                <div class="image-text">
+                    <div class="text">
+                        Dr. APJ Abdul Kalam, affectionately known as the Missile Man of India, left an indelible mark on the nation's history with his remarkable contributions in the fields of science, technology, and education. Before serving as India's President, he made significant strides as an aeronautical engineer with organizations like DRDO and ISRO. Renowned for his pivotal role in India's Pokhran-II nuclear tests and the development of missile and aerospace technologies, Kalam's legacy extends beyond his scientific achievements. He was a prolific author, poet, and scholar, with a deep-rooted commitment to inspiring and empowering the youth. Honored with prestigious awards such as the Bharat Ratna and Padma Bhushan, his vision and dedication continue to inspire generations.
+                        <ul>
+                            <li>He was also chief executive of Integrated Guided Missile Development Programme (IGMDP), where he was involved in developing many missiles of India including “Agni” and “Prithvi”.</li>
+                            <li>He was the Chief Scientific Adviser to Defence Minister and Secretary, Department of Defence Research & Development (July 1992 to December 1999). Pokhran-2 nuclear tests were conducted under his leadership.</li>
+                            <li>On Wednesday, April 29, 2009, he became the first Asian to be bestowed the Hoover Medal, America’s top engineering prize, for his outstanding contribution to public service. He had also received honorary doctorates from more than 30 universities, including the Carnegie Mellon University of the United States.</li>
+                            <li>He had written many inspirational books, like Wings of Fire which aims at motivating Indian youth. “Guiding Souls: Dialogues on the Purpose of Life” revealed his spiritual side. He was also a poet. He had written some poems in Tamil also.</li>
+                            <li>Kalam was the third President of India to have been honoured with a Bharat Ratna before being elected to the chair of President. He was also the first scientist and first unmarried person to become the President of India.</li>
+                        </ul>
+                    </div>
+                    <img src="abdul.png" alt="abdulkalam" class="image">
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Rocket Image -->
+    <div class="rocket-container">
+        <img src="—Pngtree—hand painted illustration stereoscopic small_3813056.png" alt="rocket" class="rocket">
+    </div>
+
+    <script>
+        // Add animation to the rocket after the page loads
+        window.onload = function() {
+            const rocket = document.querySelector('.rocket');
+            rocket.classList.add('fly-rocket');
+        };
+    </script>
+</body>
+</html>

@@ -19,6 +19,7 @@ int max[5][3] = {
 int visited[5] = {0};
 int need[5][3];
 int available[3] = {3, 3, 2};
+int safeSequence[5];
 
 void calculateNeed()
 {
@@ -41,9 +42,8 @@ void bankers()
         work[i] = available[i];
     }
 
-    int safeSequence[5];
+   
     int count = 0;
-
     while (count < 5)
     {
         int found = 0;
@@ -52,6 +52,7 @@ void bankers()
             if (!visited[i])
             {
                 int canfinish = 1;
+
                 for (int j = 0; j < 3; j++)
                 {
                     if (need[i][j] > work[j])
@@ -60,8 +61,6 @@ void bankers()
                         break;
                     }
                 }
-
-                
                 if (canfinish)
                 {
                     for (int k = 0; k < 3; k++)

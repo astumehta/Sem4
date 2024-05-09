@@ -1,0 +1,108 @@
+body {
+    background-color: rgb(43, 42, 42);
+}
+
+.wrap {
+    margin: 1.5em;
+    align-items: center;
+    background-color: #fffbf3;
+    padding: 2em;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    margin: 3em 0;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: rgb(32, 7, 134);
+}
+
+.divider {
+    height: 3em;
+    border-left: 2px solid black;
+    margin: 0 20px;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    font-family: 'Inter';
+}
+
+h1 {
+    font-size: 3em;
+}
+
+h3 {
+    font-size: 1.0em;
+    color: black;
+}
+
+.image-text {
+    display: flex;
+    margin: 2em 0;
+}
+
+.image {
+    height: 25em;
+    width: 25em;
+}
+
+.text {
+    align-items: start;
+}
+
+ul {
+    margin: 2.6em 0;
+    padding-left: 0;
+    text-decoration: none;
+}
+
+li {
+    margin: 0.6em;
+}
+
+/* Define animation keyframes for rocket animation */
+@keyframes rocketAnimation {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(100vw, -50vh);
+    }
+}
+
+/* Apply animation to rocket image */
+.rocket {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    animation: rocketAnimation 4s linear infinite;
+}
+
+.rocket{
+    height: 10em;
+    width:10em;
+}

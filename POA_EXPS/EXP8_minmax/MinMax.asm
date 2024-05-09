@@ -7,6 +7,7 @@ CODE SEGMENT
     
     MOV AX,DATA
     MOV DS,AX
+    
     LEA SI,N1
     MOV CL,03H
     
