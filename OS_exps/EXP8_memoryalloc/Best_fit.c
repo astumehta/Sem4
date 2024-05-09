@@ -1,15 +1,13 @@
 #include <stdio.h>
 
-#define MAX_PROCESSES 4
-#define MAX_MEMORY_BLOCKS 4
 
-int process[MAX_PROCESSES] = {1, 2, 3, 4};
+int process[4] = {1, 2, 3, 4};
 
-int incoming[MAX_PROCESSES] = {80, 170, 150, 90};
-int memory[MAX_MEMORY_BLOCKS] = {100, 200, 300, 400};
+int incoming[4] = {80, 170, 150, 90};
+int memory[4] = {100, 200, 300, 400};
 
-int visited[MAX_MEMORY_BLOCKS] = {0};
-int allocated[MAX_MEMORY_BLOCKS] = {0};
+int visited[4] = {0};
+int allocated[4] = {0};
 
 void bubbleSort(int arr[], int n)
 {
@@ -29,12 +27,12 @@ void bubbleSort(int arr[], int n)
 
 void bestfit()
 {
-    bubbleSort(memory, MAX_MEMORY_BLOCKS);
+    bubbleSort(memory, 4);
 
-    for (int i = 0; i < MAX_PROCESSES; i++)
+    for (int i = 0; i < 4; i++)
     {
         int j;
-        for (j = 0; j < MAX_MEMORY_BLOCKS; j++)
+        for (j = 0; j < 4; j++)
         {
             if (incoming[i] <= memory[j] && visited[j] != 1)
             {
@@ -52,7 +50,7 @@ int main()
 
     printf("Processes\tIncoming\tMemory\n");
 
-    for (int i = 0; i < MAX_MEMORY_BLOCKS; i++)
+    for (int i = 0; i < 4; i++)
     {
         printf("P%d\t\t%d\t\t", allocated[i], incoming[allocated[i]-1]);
         if (allocated[i] != 0)

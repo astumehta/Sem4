@@ -4,15 +4,16 @@
 #define size 5
 
 int buffer[size];
-int in = 0, out = 0;
+int in = 0;
+int out = 0;
 
 void producer()
-{   // Check if buffer is not full
-    
+{
+
     if (((in + 1) % size) != out)
-    {                            
-        int item = rand() % 100; // produce item
-        buffer[in] = item;       // put item into buffer
+    {
+        int item = rand() % 100; 
+        buffer[in] = item;
         printf("Produced: %d\n", item);
         in = (in + 1) % size;
     }
@@ -25,8 +26,8 @@ void producer()
 void consumer()
 {
     if (in != out)
-    {                           // Check if buffer is not empty
-        int item = buffer[out]; // remove item from buffer
+    {                          
+        int item = buffer[out];
         printf("Consumed: %d\n", item);
         out = (out + 1) % size;
     }
