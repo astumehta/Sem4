@@ -28,10 +28,12 @@ void dijkstra(int w[SIZE][SIZE])
     }
     d[0] = 0;
     parent[0] = -1;
+
     for (int i = 0; i < SIZE; i++)
     {
         int minIndex = min(d, visited);
         visited[minIndex] = 1;
+        
         for (int j = 0; j < SIZE; j++)
         {
             if (w[minIndex][j] != 0 && visited[j] == 0 && d[j] > d[minIndex] + w[minIndex][j])

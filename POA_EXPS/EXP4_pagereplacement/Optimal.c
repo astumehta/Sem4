@@ -1,11 +1,50 @@
 #include <stdio.h>
+#include <stdbool.h>
+
 #define SIZE 4
 
-int frames[14] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 3};
+int frames[SIZE]; // Frames in memory
+int pages[] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2}; // Reference string
+int page_count = sizeof(pages) / sizeof(pages[0]);
+bool isPresent(int page) {
+    for (int i = 0; i < SIZE; i++) {
+        if (frames[i] == page) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void replacePage(int page, int *page_faults, int *index) {
+    int lru_index = 0;
+    for (int i = 1; i < SIZE; i++) {
+        if (index[i] < index[lru_index]) {
+            lru_index = i;
+        }
+    }
+    frames[lru_index] = page;
+    (*page_faults)++;
+}
+
+void printFrames() {
+    for (int i = 0; i < SIZE; i++) {
+        if (frames[i] == -1) {
+            printf("-\t");
+        } else {
+            printf("%d\t", frames[i]);
+        }
+    }
+    printf("\n");
+}
 
 int main() {
+    int page_faults = 0;
     int hits = 0;
-    int miss = 0;
+    int index[SIZE]; // Index to store the latest occurrence of pages in frames
+    for (int i = 0; i < SIZE; i++) {
+        frames[i] = -1; // Initialize frames to -1
+        index[i] = 0; // Initialize index to 0
+    }
 
     printf("Frames:\n");
     for (int i = 0; i < SIZE; i++) {
@@ -13,47 +52,18 @@ int main() {
     }
     printf("\n");
 
-    for (int i = 0; i < 14; i++) {
-        int found = 0;
-        for (int j = 0; j < SIZE; j++) {
-            if (frames[i] == frames[j]) {
-                found = 1;
-                hits++;
-                break;
-            }
+    for (int i = 0; i < page_count; i++) {
+        if (isPresent(pages[i])) {
+            hits++;
+        } else {
+            replacePage(pages[i], &page_faults, index);
         }
-        if (!found) {
-            miss++;
-            int replaceIndex = -1;
-            for (int j = i + 1; j < 14; j++) {
-                int k;
-                for (k = 0; k < SIZE; k++) {
-                    if (frames[k] == frames[j]) {
-                        break;
-                    }
-                }
-                if (k == SIZE) {
-                    replaceIndex = j;
-                    break;
-                }
-            }
-            if (replaceIndex == -1) {
-                replaceIndex = 0;
-            }
-            frames[replaceIndex] = frames[i];
-        }
-        for (int j = 0; j < SIZE; j++) {
-            if (frames[j] == -1) {
-                printf("-\t");
-            } else {
-                printf("%d\t", frames[j]);
-            }
-        }
-        printf("\n");
+        index[pages[i]] = i;
+        printFrames();
     }
 
     printf("Number of hits: %d\n", hits);
-    printf("Number of misses: %d\n", miss);
+    printf("Number of misses: %d\n", page_faults);
 
     return 0;
 }

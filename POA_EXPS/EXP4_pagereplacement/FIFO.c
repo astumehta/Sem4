@@ -1,14 +1,14 @@
 #include <stdio.h>
-#define size 4
+#define size 3
 
-int frames[14] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 3};
+int frames[7] = {1,3,0,3,5,6,3};
 
 void fifo()
 {
     int memory[size] = {-1};
     int hits = 0;
 
-    for (int i = 0; i < 14; i++)
+    for (int i = 0; i < 7; i++)
     {
         int page = frames[i];
         int pageExists = 0;
@@ -39,7 +39,7 @@ void fifo()
         printf("\n");
     }
 
-    float hit_percentage = ((float)hits / 14) * 100;
+    float hit_percentage = ((float)hits / 7) * 100;
     printf("\nHit Percentage: %.2f%%\n", hit_percentage);
 }
 

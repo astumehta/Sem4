@@ -15,11 +15,11 @@ int max[5][3] = {
     {2, 2, 2},
     {4, 3, 3},
 };
-
 int visited[5] = {0};
 int need[5][3];
 int available[3] = {3, 3, 2};
 int safeSequence[5];
+int count = 0;
 
 void calculateNeed()
 {
@@ -32,46 +32,37 @@ void calculateNeed()
     }
 }
 
+int isSafe(int process)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        if (need[process][i] > available[i])
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void bankers()
 {
     calculateNeed();
 
-    int work[3]; 
-    for (int i = 0; i < 3; i++)
-    {
-        work[i] = available[i];
-    }
-
-   
-    int count = 0;
     while (count < 5)
     {
         int found = 0;
         for (int i = 0; i < 5; i++)
         {
-            if (!visited[i])
+            if (!visited[i] && isSafe(i))
             {
-                int canfinish = 1;
-
                 for (int j = 0; j < 3; j++)
                 {
-                    if (need[i][j] > work[j])
-                    {
-                        canfinish = 0;
-                        break;
-                    }
+                    available[j] += allocation[i][j];
                 }
-                if (canfinish)
-                {
-                    for (int k = 0; k < 3; k++)
-                    {
-                        work[k] += allocation[i][k];
-                    }
-                    visited[i] = 1;
-                    safeSequence[count++] = i;
-                    found = 1;
-                    break;
-                }
+                safeSequence[count++] = i;
+                visited[i] = 1;
+                found = 1;
+                break;
             }
         }
         if (!found)
@@ -80,11 +71,10 @@ void bankers()
             return;
         }
     }
-
-    printf("Safe sequence found: ");
+    printf("Safe sequence present: ");
     for (int i = 0; i < 5; i++)
     {
-        printf("P%d ", safeSequence[i] + 1);
+        printf("%d ", safeSequence[i]);
     }
     printf("\n");
 }

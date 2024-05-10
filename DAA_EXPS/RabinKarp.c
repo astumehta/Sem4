@@ -28,6 +28,7 @@ void search(char pat[], char txt[], int q)
         p = (d * p + pat[i]) % q;
         t = (d * t + txt[i]) % q;
     }
+    
     for (i = 0; i <= N - M; i++)
     {
         if (p == t)
