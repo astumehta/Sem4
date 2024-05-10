@@ -1,81 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define n 7
+int track[10],isvisited[10];
 
-int head = 50;
-int a[n] = {82, 170, 43, 140, 24, 16, 190};
-// 16,24,43,82,140,170,190
-// 34,26,7,
-int mindist[7];
-void bubblesort()
+int shortest(int head,int request)
 {
-    for (int i = 0; i < n - 1; i++)
+    int nearest;
+    for(int i=0;i<request;i++)
     {
-        for (int j = 0; j < n - i - 1; j++)
+        if(isvisited[i]!=1)
         {
-            if (a[j] > a[j + 1])
-            {
-                int temp = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = temp;
-            }
+            nearest=i;
+            break;
         }
     }
-}
 
-void sstf()
-{
-    int i=0;
-    int left=0;
-    int right=0;
-    int sum=0;
-    while(a[i]<=head)
+    for(int i=0;i<request;i++)
     {
-        i++;
-    }
-    i-=1;
-    if(abs(a[i]-head)<abs(a[i+1]-head))
-    {
-        left=1;
-    }
-    else
-    {
-        right=1;
-    }
-    if(left==1)
-    {
-        sum=head-a[i];
-        for(int k=i;k>0;k--)
+        if(isvisited[i]!=1 && abs(head-track[nearest]) > abs(head-track[i]))
         {
-            sum+=(a[k]-a[k-1]);
-        }
-        sum+=a[i+1]-a[0];
-        for(int k=i+1;k<n-1;k++)
-        {
-            sum+=abs(a[k]-a[k+1]);
+            nearest=i;
         }
     }
-    else
-    {
-        sum=a[i+1]-head;
-        for(int k=i+1;k<n-1;k++)
-        {
-            sum+=abs(a[k]-a[k+1]);
-        }
-        sum+=a[n-1]-a[i];
-        for(int k=i;k>0;k--)
-        {
-            sum+=(a[k]-a[k-1]);
-        }
-
-    }
-    printf("%d",sum);
-
+    return nearest;
 }
 
 void main()
 {
-    bubblesort();
-    sstf();
+    int disk, request, head, totalTrackMovement=0, visited=0;
+    printf("Enter number of disk tracks : ");
+    scanf("%d", &disk);
+    printf("Enter curent position of head : ");
+    scanf("%d", &head);
+    printf("Enter number of request in queue : ");
+    scanf("%d", &request);
+    for(int i=0; i<request; i++){
+        isvisited[i]=0;
+    }
+    printf("Enter request queue : ");
+    for(int i=0; i<request; i++){
+        scanf("%d", &track[i]);
+    }
+
+    while(visited<request)
+    {
+        int nearest = shortest(head,request);
+        printf("%d   ",track[nearest]);
+        totalTrackMovement+=abs(track[nearest]-head);
+        isvisited[nearest]=1;
+        visited++;
+        head=track[nearest];
+    }
+
+    printf("Total track movement: %d",totalTrackMovement);
 }
