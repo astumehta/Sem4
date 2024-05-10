@@ -2,7 +2,7 @@
 #include <stdbool.h>
 
 #define SIZE 3
-
+int pages[] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 3};
 // Function to check if a page is present in the frame
 int isInFrame(int frame[], int pageNumber, int count)
 {
@@ -27,7 +27,7 @@ void printFrames(int frame[], int count)
     printf("\n");
 }
 
-int lru(int pages[], int numPages)
+int lru(int numPages)
 {
     int frame[SIZE] = {0};     // Represents the frame
     int usageInfo[SIZE] = {0}; // Keeps track of the usage information for each page
@@ -73,17 +73,16 @@ int lru(int pages[], int numPages)
 
 int main()
 {
-    int pages[] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 3}; // Reference string
-    int numPages = sizeof(pages) / sizeof(pages[0]);
+    int pages[] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 3};
 
     printf("Reference String: ");
-    for (int i = 0; i < numPages; i++)
+    for (int i = 0; i < 14; i++)
     {
         printf("%d ", pages[i]);
     }
     printf("\n");
 
-    int pageFaults = lru(pages, numPages);
+    int pageFaults = lru(14);
     printf("Total page faults using LRU: %d\n", pageFaults);
 
     return 0;

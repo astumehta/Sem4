@@ -1,8 +1,8 @@
 #include <stdio.h>
-int process[] = {1, 2, 3, 4, 5};
-    int AT[] = {0, 3, 5, 6, 8};
-    int BT[] = {10, 5, 2, 6, 4};
-void bubbleSort(int AT[], int process[], int BT[], int n) {
+int process[] = {1, 2, 3, 4};
+    float AT[] = {0,2,3,5};
+    float BT[] = {4,3,2,1};
+void bubbleSort(float AT[], int process[], float BT[], int n) {
     int i, j, temp_process, temp_AT, temp_BT;
     for (i = 0; i < n - 1; i++) {
         for (j = 0; j < n - i - 1; j++) {
@@ -25,24 +25,30 @@ void bubbleSort(int AT[], int process[], int BT[], int n) {
 
 void fcfs()
 {
-    int gantt[6];
-    int awt=0;
-    int atat=0;
+    float awt=0;
+    float atat=0;
+    float gantt[5];
     gantt[0]=AT[0];
     for(int i=1;i<5;i++)
     {
-        gantt[i]=gantt[i-1]+BT[i-1];
-        awt+=gantt[i]-AT[i];
+        gantt[i]=BT[i-1]+gantt[i-1];
     }
     for(int i=0;i<5;i++)
     {
-        atat+=BT[i];
+        printf("%f->",gantt[i]);
     }
+    for(int i=0;i<4;i++)
+    {
+        awt=awt+gantt[i]-AT[i];
+    }
+    printf("\nAWT IS %f",awt/4);
 
-    float avgawt=(float)awt/5;
-    float avgatat=(float)atat/5;
-    printf("%f",avgawt);
-    printf("%f",avgatat);
+
+    for(int i=0;i<4;i++)
+    {
+        atat=atat+(gantt[i+1]-AT[i]);
+    }
+    printf("\nATAT IS %f",atat/4);
 }
 
 int main() {

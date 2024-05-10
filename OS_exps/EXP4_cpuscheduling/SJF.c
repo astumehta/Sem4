@@ -1,14 +1,13 @@
 #include <stdio.h>
 #define INT_MAX 999
-
-int process[] = {1, 2, 3, 4, 5};
-int AT[] = {1, 3, 6, 7, 9};
-int BT[] = {7, 3, 2, 10, 8};
-int visited[5] = {0};
-
-void bubbleSort(int AT[], int process[], int BT[], int n)
+int process[] = {1, 2, 3, 4};
+float AT[] = {0, 2, 3, 5};
+float BT[] = {4, 3, 2, 1};
+int completed[4] = {0};
+void bubbleSort(float AT[], int process[], float BT[], int n)
 {
-    int i, j, temp_process, temp_AT, temp_BT;
+    int i, j, temp_process;
+    float temp_AT, temp_BT;
     for (i = 0; i < n - 1; i++)
     {
         for (j = 0; j < n - i - 1; j++)
@@ -31,107 +30,78 @@ void bubbleSort(int AT[], int process[], int BT[], int n)
     }
 }
 
-void bubbleSortBT(int BT[], int process[], int AT[], int n)
-{
-    int i, j, temp_process, temp_AT, temp_BT;
-    for (i = 0; i < n - 1; i++)
-    {
-        for (j = 0; j < n - i - 1; j++)
-        {
-            if (BT[j] > BT[j + 1])
-            {
-                temp_BT = BT[j];
-                BT[j] = BT[j + 1];
-                BT[j + 1] = temp_BT;
-
-                temp_AT = AT[j];
-                AT[j] = AT[j + 1];
-                AT[j + 1] = temp_AT;
-
-                temp_process = process[j];
-                process[j] = process[j + 1];
-                process[j + 1] = temp_process;
-            }
-        }
-    }
-}
-
 void sjf()
 {
-    bubbleSort(AT, process, BT, 5);
+    float awt = 0;
+    float atat = 0;
+    float gantt[4];
+    int remainingBT[4];
 
-    int gantt[100];
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 4; i++)
     {
-        gantt[i] = 0;
+        remainingBT[i] = BT[i];
     }
 
-    int total = AT[0];
-    for (int i = 0; i < 5; i++)
+    // Sort processes based on arrival time
+    bubbleSort(AT, process, BT, 4);
+
+    // Initialize gantt chart
+    gantt[0] = AT[0];
+    gantt[1] = gantt[0] + BT[0];
+    completed[0] = 1;
+
+    for (int i = 1; i < 4; i++)
     {
-        total += BT[i];
-    }
-
-    printf("Gantt Chart:\n");
-
-    int index = 0;
-    for (int i = 0; i < total;)
-    {
-        int shortest = -1;
-        int shortestBT = INT_MAX;
-
-        for (int j = 0; j < 5; j++)
+        int min_index = -1;
+        int min_BT = INT_MAX;
+        
+        // Find the process with the minimum remaining burst time
+        for (int j = 0; j < 4; j++)
         {
-            if (!visited[j] && AT[j] <= i && BT[j] < shortestBT)
+            if (!completed[j] && AT[j] <= gantt[i] && remainingBT[j] < min_BT)
             {
-                shortest = j;
-                shortestBT = BT[j];
+                min_index = j;
+                min_BT = remainingBT[j];
             }
         }
 
-        if (shortest != -1)
+        // Update gantt chart and remaining burst time
+        if (min_index != -1)
         {
-            gantt[index++] = process[shortest];
-            i += BT[shortest];
-            visited[shortest] = 1;
+            gantt[i + 1] = gantt[i] + remainingBT[min_index];
+            remainingBT[min_index] = 0;
+            completed[min_index] = 1;
         }
         else
         {
-            i++;
+            // No process is available, move to the next arrival time
+            gantt[i + 1] = AT[i];
         }
     }
 
-    for (int i = 0; i < 100 && gantt[i] != 0; i++)
+    for (int i = 0; i < 4; i++)
     {
-        printf("P%d ", gantt[i]);
+        awt += gantt[i + 1] - AT[i] - BT[i];
+        atat += gantt[i + 1] - AT[i];
+    }
+
+    printf("Gantt Chart:\n");
+    printf("%.2f ", gantt[0]);
+    for (int i = 0; i < 4; i++)
+    {
+        printf("P%d %.2f ", process[i], gantt[i + 1]);
     }
     printf("\n");
 
-    int WT[5], TAT[5];
-    float totalWT = 0, totalTAT = 0;
-
-    for (int i = 0; i < 5; i++)
-    {
-        WT[i] = gantt[i] - AT[i];
-        totalWT += WT[i];
-        TAT[i] = gantt[i] + BT[i] - AT[i];
-        totalTAT += TAT[i];
-    }
-
-    printf("\nProcess\tWT\tTAT\n");
-    for (int i = 0; i < 5; i++)
-    {
-        printf("P%d\t%d\t%d\n", process[i], WT[i], TAT[i]);
-    }
-
-    float AWT = totalWT / 5;
-    float ATAT = totalTAT / 5;
-
-    printf("\nAverage Waiting Time: %.2f\n", AWT);
-    printf("Average Turnaround Time: %.2f\n", ATAT);
+    printf("AWT: %.2f\n", awt / 4);
+    printf("ATAT: %.2f\n", atat / 4);
 }
 
-void main()
+int main()
 {
+    int n = sizeof(process) / sizeof(process[0]);
+
+    bubbleSort(AT, process, BT, n);
     sjf();
+    return 0;
 }
