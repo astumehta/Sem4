@@ -1,50 +1,31 @@
 #include <stdio.h>
-#define size 3
+#define size 4
+int frames[size];
+int pages[14] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 3};
 
-int frames[7] = {1,3,0,3,5,6,3};
-
-void fifo()
-{
-    int memory[size] = {-1};
-    int hits = 0;
-
-    for (int i = 0; i < 7; i++)
-    {
-        int page = frames[i];
-        int pageExists = 0;
-        //page exists?
-        for (int j = 0; j < size; j++)
-        {
-            if (memory[j] == page)
-            {
-                pageExists = 1;
-                hits++;
+void main(){
+    int pagefound,hit=0,miss=0,k=0;
+    for(int i=0;i<size;i++){
+        frames[i]=-1;
+    }
+    for(int i=0;i<14;i++){
+        pagefound=0;
+        for(int j=0;j<size;j++){
+            if(frames[j]==pages[i]){
+                hit++;
+                pagefound=1;
                 break;
             }
         }
-        //page not existing , remove last page and make space for new page on top to give memory[0] to new page
-        if (!pageExists)
-        {
-            for (int j = size - 1; j >= 1; j--)
-            {
-                memory[j] = memory[j - 1];
-            }
-            memory[0] = page;
+        if(!pagefound){
+            miss++;
+            frames[k]=pages[i];
+            k=(k+1)%size;
         }
-
-        for (int j = 0; j < size; j++)
-        {
-            printf("%d ", memory[j]);
+        for(int z=0;z<size;z++){
+            printf("%d ",frames[z]);
         }
         printf("\n");
     }
-
-    float hit_percentage = ((float)hits / 7) * 100;
-    printf("\nHit Percentage: %.2f%%\n", hit_percentage);
-}
-
-int main()
-{
-    fifo();
-    return 0;
+    printf("Hits:%d , Miss:%d",hit,miss);
 }
