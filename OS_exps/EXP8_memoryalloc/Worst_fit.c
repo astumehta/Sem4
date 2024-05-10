@@ -5,7 +5,7 @@ int incoming[4] = {212, 417, 112, 426};
 int memory[5] = {100, 500, 200, 300, 600};
 int visited[5] = {0};
 int allocated[5] = {0};
-void bubbleSort(int arr[], int n)
+void bubbleSortdes(int arr[], int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
@@ -22,7 +22,7 @@ void bubbleSort(int arr[], int n)
 }
 void worstfit()
 {
-    bubbleSort(memory, 5);
+    bubbleSortdes(memory, 5);
     int j;
     for (int i = 0; i < 4; i++)
     {

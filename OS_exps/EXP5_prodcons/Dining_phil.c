@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define NUM_PHILOSOPHERS 5
+#define n 5
 
 void think(int id)
 {
@@ -28,23 +28,22 @@ void philosopher(int id)
 int main()
 {
     srand(time(NULL));
-    for (int i = 0; i < NUM_PHILOSOPHERS; i++)
+    for (int i = 0; i < n; i++)
     {
         pid_t pid = fork();
         if (pid == 0)
-        { // Child process
+        { 
             philosopher(i);
             exit(0);
         }
         else if (pid < 0)
-        { // Fork failed
+        { 
             perror("Fork failed");
             exit(1);
         }
     }
 
-    // Wait for all philosopher processes to finish
-    for (int i = 0; i < NUM_PHILOSOPHERS; i++)
+    for (int i = 0; i < n; i++)
     {
         wait(NULL);
     }

@@ -47,7 +47,6 @@ int isSafe(int process)
 void bankers()
 {
     calculateNeed();
-
     while (count < 5)
     {
         int found = 0;
@@ -65,6 +64,7 @@ void bankers()
                 break;
             }
         }
+
         if (!found)
         {
             printf("No safe sequence\n");

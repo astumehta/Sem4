@@ -1,81 +1,84 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define size 5
-
-int buffer[size];
-int in = 0;
+int buffer[8];
+int buffer_size = 5;
+int full = 0;
+int empty = 5;
+int semaphore = 1;
+int in = -1;
 int out = 0;
+
+int up(int n)
+{
+    return ++n;
+}
+int down(int n)
+{
+    return --n;
+}
+
+int produce_item()
+{
+    int item = rand() % 10;
+    printf("Producer produced item : %d\n", item);
+    return item;
+}
 
 void producer()
 {
-
-    if (((in + 1) % size) != out)
-    {
-        int item = rand() % 100; 
-        buffer[in] = item;
-        printf("Produced: %d\n", item);
-        in = (in + 1) % size;
-    }
-    else
-    {
-        printf("Buffer is full!\n");
-    }
+    int item = produce_item();
+    empty = down(empty);
+    semaphore = down(semaphore);
+    in = (in + 1) % buffer_size;
+    buffer[in] = item;
+    full = up(full);
+    semaphore = up(semaphore);
 }
 
 void consumer()
 {
-    if (in != out)
-    {                          
-        int item = buffer[out];
-        printf("Consumed: %d\n", item);
-        out = (out + 1) % size;
-    }
-    else
-    {
-        printf("Buffer is empty!\n");
-    }
+    full = down(full);
+    semaphore = down(semaphore);
+    int item = buffer[out];
+    out = (out + 1) % buffer_size;
+    empty = up(empty);
+    semaphore = up(semaphore);
+    printf("Consumer consumes item : %d\n", item);
 }
 
-void displayBuffer()
+void main()
 {
-    printf("Current Buffer: ");
-    if (in == out)
-    {
-        printf("Empty\n");
-        return;
-    }
-    int i;
-    for (i = out; i != in; i = (i + 1) % size)
-    {
-        printf("%d ", buffer[i]);
-    }
-    printf("\n");
-}
-
-int main()
-{
-    int n;
+    int choice, arr[20] = {1, 2};
     while (1)
     {
-        printf("\nEnter your choice from the menu below:\n 1 - Produce\n 2 - Consume\n 3 - Display Buffer\n 4 - Exit\nYour choice: ");
-        scanf("%d", &n);
-        switch (n)
+        choice = arr[rand() % 2];
+        switch (choice)
         {
         case 1:
-            producer();
+            if (semaphore == 1 && full != 0)
+            {
+                consumer();
+            }
+            else
+            {
+                printf("Buffer Empty Consumer Preemteed\n");
+            }
             break;
         case 2:
-            consumer();
+            if (semaphore == 1 && empty != 0)
+            {
+                producer();
+            }
+            else
+            {
+                printf("Buffer Full Producer Preemteed\n");
+            }
             break;
         case 3:
-            displayBuffer();
-            break;
-        case 4:
             exit(0);
-        default:
-            printf("Invalid choice! Please enter 1, 2, 3, or 4.\n");
+            break;
         }
+        sleep(2);
     }
-    return 0;
 }
