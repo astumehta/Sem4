@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  
+    <link rel="stylesheet" href="form.css">
+    
+</head>
+<body>
+    <div class="wrap">
+        <form id="form" action="/">
+                <h1>Registration form</h1>
+                <div class="input-control">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username">
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    <label for="password">Password</label>
+                    <input type="text" id="password" name="password">
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    <label for="password2">Confirm Password</label>
+                    <input type="text" id="password2" name="password2">
+                    <div class="error"></div>
+                </div>
+                <button type="submit">Sign up</button>
+        </form>
+        <div class="img"><img src="cat.png" alt="cat"></div>
+    </div>
+</body>
+</html>

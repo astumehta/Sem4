@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="1">
+    <input type="number" id="2">
+    <input type="number" id="3">
+
+    <input type="button" value="Calculate" onclick="return calculate()">
+    <div class="ans" id="ans"> 
+    </div>
+</body>
+<script>
+    function calculate(){
+    var num1=document.getElementById('1').value;
+    var num2=document.getElementById('2').value;
+    var num3=document.getElementById('3').value;
+    var message=document.getElementById('ans');
+
+
+    let ans=num1*num2*num3;
+        if(ans>0)
+        {
+            message.innerHTML="+";
+        }
+        else if(ans<0)
+        {
+            message.innerHTML="-";
+        }
+        else
+        {
+            message.innerHTML="0";
+        }
+
+    
+    }
+
+</script>
+</html>

@@ -1,0 +1,16 @@
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    background-color: blue;
+    padding: 20px;
+}
+body {
+    background-color: lightgreen;
+}
+
+.black-bg {
+    background-color: black !important;
+}

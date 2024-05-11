@@ -1,0 +1,15 @@
+.container{
+    max-width: 500px;
+    margin: 2em auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+body{
+    color: rgb(0, 0, 0);
+}
+.fields{
+    padding: 1em 0;
+    flex-direction: column;
+    display: flex;
+}
