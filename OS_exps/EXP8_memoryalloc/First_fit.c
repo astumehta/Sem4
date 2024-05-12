@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int process[4] = {1, 2, 3, 4};
-int incoming[4] = {80, 170, 20, 30};
+int incoming[4] = {80, 20, 20, 30};
 int memory[5] = {100, 200, 300, 400, 500};
 int remaining[5] = {100, 200, 300, 400, 500};
 int visited[5] = {0};
