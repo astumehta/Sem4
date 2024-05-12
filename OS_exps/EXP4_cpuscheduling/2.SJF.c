@@ -64,9 +64,7 @@ int main()
         TAT[min_index] = CT[min_index] - AT[min_index];
         WT[min_index] = TAT[min_index] - BT[min_index];
 
-        final[completed] = process[min_index];
-        printf("%d\n", final[completed]);
-        
+        printf("%d\n", process[min_index]);
         visited[min_index] = 1;
 
         time += BT[min_index];

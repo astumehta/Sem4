@@ -1,15 +1,15 @@
-// HAVENT PRINTED TABLE IN THIS CODE, PRINT YOURSELF
-
-
 #include <stdio.h>
-int process[] = {1, 2, 3, 4};
-    float AT[] = {0,2,3,5};
-    float BT[] = {4,3,2,1};
-void bubbleSort(float AT[], int process[], float BT[], int n) {
-    int i, j, temp_process, temp_AT, temp_BT;
-    for (i = 0; i < n - 1; i++) {
-        for (j = 0; j < n - i - 1; j++) {
-            if (AT[j] > AT[j + 1]) {
+
+void bubbleSort(float AT[], int process[], float BT[], int n)
+{
+    int i, j, temp_process;
+    float temp_AT, temp_BT;
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (AT[j] > AT[j + 1])
+            {
                 temp_AT = AT[j];
                 AT[j] = AT[j + 1];
                 AT[j + 1] = temp_AT;
@@ -26,39 +26,57 @@ void bubbleSort(float AT[], int process[], float BT[], int n) {
     }
 }
 
-void fcfs()
+void fcfs(float AT[], int process[], float BT[], int n)
 {
-    float awt=0;
-    float atat=0;
-    float gantt[5];
-    gantt[0]=AT[0];
-    for(int i=1;i<5;i++)
-    {
-        gantt[i]=BT[i-1]+gantt[i-1];
-    }
-    for(int i=0;i<5;i++)
-    {
-        printf("%f->",gantt[i]);
-    }
-    for(int i=0;i<4;i++)
-    {
-        awt=awt+gantt[i]-AT[i];
-    }
-    printf("\nAWT IS %f",awt/4);
+    float awt = 0, atat = 0;
+    float gantt[n];
+    float CT[n], WT[n], TAT[n];
 
-
-    for(int i=0;i<4;i++)
+    gantt[0] = AT[0];
+    for (int i = 1; i < n; i++)
     {
-        atat=atat+(gantt[i+1]-AT[i]);
+        gantt[i] = BT[i - 1] + gantt[i - 1];
     }
-    printf("\nATAT IS %f",atat/4);
+
+    for (int i = 0; i < n; i++)
+    {
+        CT[i] = gantt[i];
+        WT[i] = CT[i] - AT[i];
+        TAT[i] = WT[i] + BT[i];
+        awt += WT[i];
+        atat += TAT[i];
+    }
+
+    printf("Pno\tAT\tBT\tCT\tWT\tTAT\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\n", process[i], AT[i], BT[i], CT[i], WT[i], TAT[i]);
+    }
+
+    printf("\nAverage Waiting Time (AWT): %.2f", awt / n);
+    printf("\nAverage Turnaround Time (ATAT): %.2f", atat / n);
 }
 
-int main() {
-    
-    int n = sizeof(process) / sizeof(process[0]);
+int main()
+{
+    int n;
+
+    printf("Enter the number of processes: ");
+    scanf("%d", &n);
+
+    int process[n];
+    float AT[n], BT[n];
+
+    printf("Enter arrival time (AT) and burst time (BT) for each process:\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("Process %d: ", i + 1);
+        scanf("%f %f", &AT[i], &BT[i]);
+        process[i] = i + 1;
+    }
 
     bubbleSort(AT, process, BT, n);
-    fcfs();
+    fcfs(AT, process, BT, n);
+
     return 0;
 }

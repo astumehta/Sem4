@@ -9,7 +9,7 @@ int main()
     int complete = 0;
     int process[n];
     int remaining[n];
-    // int priority[]={4,5,7,2,1,6};
+    
     for (int i = 0; i < n; i++)
     {
         process[i] = i + 1;
@@ -59,7 +59,7 @@ int main()
         }
         printf("P%d\t", process[min_index]);
         printf("%d\n", time);
-        
+
         time++;
         remaining[min_index]--;
 
