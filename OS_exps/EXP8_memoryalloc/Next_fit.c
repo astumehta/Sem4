@@ -1,40 +1,34 @@
 #include <stdio.h>
 
+int process[3] = {1, 2, 3};
+int incoming[3] = {100,231,249};
+int memory[3] = {350,200,300};
+int remaining[3] = {350,200,300};
+int visited[3] = {0};
 
-int process[5] = {1, 2, 3, 4, 5};
-int incoming[5] = {450, 417, 112, 290, 90};
-int memory[5] = {125, 500, 200, 300, 600};
-
-int visited[5] = {0};
-int allocated[5] = {0};
-
-void nextfit() {
-    int previous = -1;
-    for (int i = 0; i < 5; i++) {
-        int j;
-        for (j = previous + 1; j < 5; j++) {
-            if (incoming[i] <= memory[j] && !visited[j]) {
-                allocated[j] = process[i];
-                visited[j] = 1;
-                previous = j;
+void nextfit()
+{
+    printf("P\tIncoming\tMemory Block\n");
+    int prev = -1;
+    for (int i = 0; i < 3; i++)
+    {
+        printf("P%d\t%d\t", process[i], incoming[i]);
+        for (int j = (prev + 1) % 3; j < 3; j++)
+        {
+            if (incoming[i] <= remaining[j])
+            {
+                printf("%d", memory[j]);
+                printf("\n");
+                remaining[j] -= incoming[i];
+                prev = j;
                 break;
             }
         }
-        if (j == 5) {
-            printf("Process P%d cannot be allocated.\n", process[i]);
-        }
     }
 }
 
-int main() {
+int main()
+{
     nextfit();
-    
-    printf("Processes\tIncoming\tMemory\n");
-    for (int i = 0; i < 5; i++) {
-        if (allocated[i] != 0) {
-            printf("P%d\t\t%d\t\t%d\n", allocated[i], incoming[allocated[i] - 1], memory[i]);
-        }
-    }
     return 0;
 }
-
