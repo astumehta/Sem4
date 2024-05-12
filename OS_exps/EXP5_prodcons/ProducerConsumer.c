@@ -28,10 +28,13 @@ int produce_item()
 void producer()
 {
     int item = produce_item();
+
     empty = down(empty);
     semaphore = down(semaphore);
+
     in = (in + 1) % buffer_size;
     buffer[in] = item;
+    
     full = up(full);
     semaphore = up(semaphore);
 }
@@ -40,8 +43,10 @@ void consumer()
 {
     full = down(full);
     semaphore = down(semaphore);
+
     int item = buffer[out];
     out = (out + 1) % buffer_size;
+    
     empty = up(empty);
     semaphore = up(semaphore);
     printf("Consumer consumes item : %d\n", item);

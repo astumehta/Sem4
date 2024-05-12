@@ -34,8 +34,6 @@ void scan()
     sum=max-head;
     sum+=max-a[0];
     printf("%d",sum);
-    
-
 }
 
 void main()

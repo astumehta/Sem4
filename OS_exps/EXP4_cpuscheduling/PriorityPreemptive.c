@@ -1,27 +1,29 @@
 #include <stdio.h>
-
+#define n 4
 int main()
 {
-    int n = 5;
-    int AT[] = {1, 3, 6, 7, 9};
-    int BT[] = {7, 3, 2, 10, 8};
+
+    int AT[] = {0, 1, 2, 4};
+    int BT[] = {5, 4, 2, 1};
+    int remaining[n];
     int process[n];
+    
     int final[n];
     int visited[n];
+    int priority[] = {10, 20, 30, 40};
 
     for (int i = 0; i < n; i++)
     {
         process[i] = i + 1;
         visited[i] = 0;
+        remaining[i] = BT[i];
     }
-
     for (int i = 0; i < n - 1; i++)
     {
         for (int j = i + 1; j < n; j++)
         {
             if (AT[i] > AT[j])
             {
-
                 int temp = AT[i];
                 AT[i] = AT[j];
                 AT[j] = temp;
@@ -33,51 +35,56 @@ int main()
                 temp = process[i];
                 process[i] = process[j];
                 process[j] = temp;
+
+                temp = remaining[i];
+                remaining[i] = remaining[j];
+                remaining[j] = temp;
+
+                temp = priority[i];
+                priority[i] = priority[j];
+                priority[j] = temp;
             }
         }
     }
 
     int time = 0;
     int completed = 0;
-
     int CT[n];
     int TAT[n];
-    int WT[n];
-
+    int AWT[n];
     time += AT[0];
-
     while (completed < n)
     {
-        int min_burst = 1000;
-        int min_index = -1;
+        int max_burst = -1;
+        int max_index = -1;
 
         for (int i = 0; i < n; i++)
         {
-            if (visited[i] == 0 && AT[i] <= time && BT[i] < min_burst)
+            if (visited[i] == 0 && AT[i] <= time && priority[i] > max_burst)
             {
-                min_burst = BT[i];
-                min_index = i;
+                max_burst = priority[i];
+                max_index = i;
             }
         }
-        
-        CT[min_index] = time + BT[min_index];
-        TAT[min_index] = CT[min_index] - AT[min_index];
-        WT[min_index] = TAT[min_index] - BT[min_index];
+        time++;
+        remaining[max_index]--;
 
-        final[completed] = process[min_index];
-        printf("%d\n", final[completed]);
-        
-        visited[min_index] = 1;
+        if (remaining[max_index] == 0)
+        {
+            CT[max_index] = time;   //NO ADDING BT
+            TAT[max_index] = CT[max_index] - AT[max_index];
+            AWT[max_index] = TAT[max_index] - BT[max_index];
 
-        time += BT[min_index];
-        completed++;
+            final[completed] = process[max_index];
+            visited[max_index] = 1;
+            completed++;
+        }
     }
-
     printf("Process\tAT\tBT\tCT\tTAT\tWT\n");
     for (int i = 0; i < n; i++)
     {
         printf("P%d\t%d\t%d\t%d\t%d\t%d\n", process[i], AT[i], BT[i], CT[i],
-               TAT[i], WT[i]);
+               TAT[i], AWT[i]);
     }
     printf("\n");
 
