@@ -1,3 +1,6 @@
+// HAVENT PRINTED TABLE IN THIS CODE, PRINT YOURSELF
+
+
 #include <stdio.h>
 int process[] = {1, 2, 3, 4};
     float AT[] = {0,2,3,5};
