@@ -59,6 +59,7 @@ int main()
         }
         printf("P%d\t", process[min_index]);
         printf("%d\n", time);
+        
         time++;
         remaining[min_index]--;
 

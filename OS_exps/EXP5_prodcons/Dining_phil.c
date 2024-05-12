@@ -1,52 +1,34 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-#define n 5
-
-void think(int id)
-{
-    printf("Philosopher %d is thinking.\n", id);
-    sleep(rand() % 5 + 1); 
-}
-
-void eat(int id)
-{
-    printf("Philosopher %d is eating.\n", id);
-    sleep(rand() % 5 + 1); 
-}
-
-void philosopher(int id)
-{
-    while (1)
-    {
-        think(id);
-        eat(id);
+#include<stdio.h>
+int main(){
+    int n=5;
+    int forks[5];
+    for(int i=0;i<n;i++){
+        forks[i]=1;
     }
-}
-
-int main()
-{
-    srand(time(NULL));
-    for (int i = 0; i < n; i++)
-    {
-        pid_t pid = fork();
-        if (pid == 0)
-        { 
-            philosopher(i);
-            exit(0);
+    int philosopher;
+    
+    while(1){
+        printf("Enter the philosopher who wants to eat\n:");
+        scanf("%d",&philosopher);
+        if(philosopher==-1){
+            break;
         }
-        else if (pid < 0)
-        { 
-            perror("Fork failed");
-            exit(1);
+        else{
+            printf("P%d is now thinking to eat\n",philosopher);
+            if(forks[philosopher-1]==1){
+                printf("P%d is  gets fork %d\n",philosopher,philosopher);
+                forks[philosopher-1]=0;
+            }
+            if(forks[philosopher%n]==1){
+                printf("P%d is  gets fork %d\n",philosopher,philosopher%n+1);
+                forks[philosopher%n]=0;
+            }
+            printf("P%d starts eating...\n",philosopher);
+            forks[philosopher-1]=1;
+            forks[philosopher%n]=1;
+            printf("P%d stops eating eating\n",philosopher);
+            
         }
+        
     }
-
-    for (int i = 0; i < n; i++)
-    {
-        wait(NULL);
-    }
-
-    return 0;
 }
