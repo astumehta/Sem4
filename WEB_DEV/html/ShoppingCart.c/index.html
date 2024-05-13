@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        /* Style for the shopping cart list */
+        #cartList {
+            margin-top: 2em
+        }
+    </style>
+</head>
+<body>
+    <form id="addItemForm">
+        <label for="item">Item:</label>
+        <input type="text" id="item" name="item">
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price">
+
+        <button type="submit">Add to Cart</button>
+    </form>
+
+    <ul id="cartList"></ul>
+
+    <script>
+        document.getElementById("addItemForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var itemInput = document.getElementById("item");
+            var priceInput = document.getElementById("price");
+
+            var item = itemInput.value.trim();
+            var price = priceInput.value.trim();
+
+            if (!item || !price) {
+                alert("Please enter both item and price.");
+                return;
+            }
+
+            var listItem = document.createElement("li");
+            listItem.textContent = `${item}: $${price}`;
+
+            document.getElementById("cartList").appendChild(listItem);
+
+            itemInput.value = "";
+            priceInput.value = "";
+        });
+    </script>
+</body>
+</html>

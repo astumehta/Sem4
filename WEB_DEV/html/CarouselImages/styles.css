@@ -1,0 +1,23 @@
+
+
+.slider{
+    margin: 50px auto;
+    width: 50%;
+}
+
+.img-box img{
+    width: 100%;
+}
+.btn{
+    border: none;
+    outline: none;
+    background: rgb(153, 231, 8);
+    padding: 10px 30px;
+    font-size: 20px;
+    color: aqua;
+    cursor: pointer;
+    margin: 10px auto;
+}
+.btn:hover{
+    background: rgb(39, 38, 38);
+}
