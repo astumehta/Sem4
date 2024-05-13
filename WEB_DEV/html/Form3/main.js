@@ -1,12 +1,15 @@
-
 function getvalidate() {
-    var name = document.getElementById("name").value.trim();
-var email = document.getElementById("email").value.trim();
-var password = document.getElementById("password").value.trim();
-var phone = document.getElementById("phone").value.trim();
-var address = document.getElementById("address").value.trim();
-var dob = document.getElementById("dob").value.trim();
-var message = document.getElementById("msg");
+  var name = document.getElementById("name").value.trim();
+  var email = document.getElementById("email").value.trim();
+  var password = document.getElementById("password").value.trim();
+  var phone = document.getElementById("phone").value.trim();
+  var address = document.getElementById("address").value.trim();
+  var dob = document.getElementById("dob").value.trim();
+
+
+  var message = document.getElementById("msg");
+
+
   var phoneNumberPattern = /^[0-9]{10}$/;
   var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var passwordPattern = /^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
@@ -41,19 +44,25 @@ var message = document.getElementById("msg");
   if (errorMsg !== "") {
     alert(errorMsg);
     return false;
+    getclear();
   } else {
     message.innerHTML = "FORM SUBMITTED";
+    fadeOutForm();
+    return true;
+    
   }
+}
 
-  return true;
+function fadeOutForm() {
+  var formContainer = document.getElementById("formContainer");
+  formContainer.classList.add("fadeOut");
 }
 function getclear() {
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("password").value = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("address").value = "";
-    document.getElementById("dob").value = "";
-    document.getElementById("msg").innerHTML = "";
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("address").value = "";
+  document.getElementById("dob").value = "";
+  document.getElementById("msg").innerHTML = "";
 }
-
