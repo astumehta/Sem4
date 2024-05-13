@@ -5,7 +5,8 @@ int pages[14] = {7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 3};
 
 void main()
 {
-    int pagefound, hit = 0, miss = 0, k = 0;
+    int pagefound, hit = 0, miss = 0;
+    int k=0;
     for (int i = 0; i < size; i++)
     {
         frames[i] = -1;

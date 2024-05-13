@@ -29,32 +29,68 @@ void bubbleSort(float AT[], int process[], float BT[], int n)
 void fcfs(float AT[], int process[], float BT[], int n)
 {
     float awt = 0, atat = 0;
-    float gantt[n];
+    float gantt[2 * n + 1];
     float CT[n], WT[n], TAT[n];
+    float idleTime = 0;
 
-    gantt[0] = AT[0];
+    gantt[0] = 0;
+    gantt[1] = AT[0];
+
+    CT[0] = AT[0] + BT[0];
+    TAT[0] = CT[0] - AT[0];
+    WT[0] = TAT[0] - BT[0];
+    awt += WT[0];
+    atat += TAT[0];
+
+    gantt[2] = CT[0];
+
     for (int i = 1; i < n; i++)
     {
-        gantt[i] = BT[i - 1] + gantt[i - 1];
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        CT[i] = gantt[i];
-        WT[i] = CT[i] - AT[i];
-        TAT[i] = WT[i] + BT[i];
+        if (AT[i] > CT[i - 1])
+        {
+            idleTime += AT[i] - CT[i - 1];
+            gantt[2 * i + 1] = CT[i - 1];
+            gantt[2 * i + 2] = AT[i];
+            CT[i] = AT[i] + BT[i];
+            TAT[i] = CT[i] - AT[i];
+            WT[i] = TAT[i] - BT[i];
+        }
+        else
+        {
+            CT[i] = CT[i - 1] + BT[i];
+            TAT[i] = CT[i] - AT[i];
+            WT[i] = TAT[i] - BT[i];
+        }
         awt += WT[i];
         atat += TAT[i];
+
+        gantt[2 * i + 1] = CT[i - 1];
+        gantt[2 * i + 2] = CT[i];
     }
 
-    printf("Pno\tAT\tBT\tCT\tWT\tTAT\n");
+    printf("Gantt Chart:\n");
+    for (int i = 0; i < 2 * n; i++)
+    {
+        if (i % 2 == 0)
+        {
+            printf("%.2f -> ", gantt[i]);
+        }
+        else
+        {
+            printf("P%d -> ", process[i / 2]);
+        }
+    }
+    printf("%.2f\n", gantt[2 * n]);
+
+    printf("\nPno\tAT\tBT\tCT\tWT\tTAT\n");
     for (int i = 0; i < n; i++)
     {
         printf("%d\t%.2f\t%.2f\t%.2f\t%.2f\t%.2f\n", process[i], AT[i], BT[i], CT[i], WT[i], TAT[i]);
     }
 
-    printf("\nAverage Waiting Time (AWT): %.2f", awt / n);
-    printf("\nAverage Turnaround Time (ATAT): %.2f", atat / n);
+    printf("\nAverage Waiting Time (AWT): %.2f\n", awt / n);
+    printf("Average Turnaround Time (ATAT): %.2f\n", atat / n);
+    printf("Total Idle Time: %.2f\n", idleTime);
 }
 
 int main()

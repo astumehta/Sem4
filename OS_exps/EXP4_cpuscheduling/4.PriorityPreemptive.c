@@ -79,7 +79,6 @@ int main()
             TAT[max_index] = CT[max_index] - AT[max_index];
             AWT[max_index] = TAT[max_index] - BT[max_index];
 
-            final[completed] = process[max_index];
             visited[max_index] = 1;
             completed++;
         }

@@ -1,56 +1,62 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int track[10],isvisited[10];
+#define MAX_TRACKS 1000
 
-int shortest(int head,int request)
+int requests = 0, tracks[MAX_TRACKS], head, disk, start, end, total, visited[MAX_TRACKS] = {0};
+
+void sstf()
 {
-    int nearest;
-    for(int i=0;i<request;i++)
-    {
-        if(isvisited[i]!=1)
-        {
-            nearest=i;
-            break;
-        }
-    }
+    int temp = head;
+    int path[MAX_TRACKS];
+    int path_index = 0;
 
-    for(int i=0;i<request;i++)
+    for (int j = 0; j < requests; j++)
     {
-        if(isvisited[i]!=1 && abs(head-track[nearest]) > abs(head-track[i]))
+        int min = 999;
+        int tempmin = 0;
+        int tempi;
+        for (int i = 0; i < requests; i++)
         {
-            nearest=i;
+            if (abs(temp - tracks[i]) < min && visited[i] != 1)
+            {
+                min = abs(temp - tracks[i]);
+                tempmin = tracks[i];
+                tempi = i;
+            }
         }
+        visited[tempi] = 1;
+        temp = tempmin;
+        total += min;
+        path[path_index++] = tempmin;
     }
-    return nearest;
+    printf("Total track movement: %d\n", total);
+    printf("Path taken by the track: ");
+    for (int i = 0; i < path_index; i++)
+    {
+        printf("%d ", path[i]);
+    }
 }
 
-void main()
+int main()
 {
-    int disk, request, head, totalTrackMovement=0, visited=0;
-    printf("Enter number of disk tracks : ");
+    printf("Enter the number of disk tracks: ");
     scanf("%d", &disk);
-    printf("Enter curent position of head : ");
+    printf("Enter the start and end of the disk tracks: ");
+    scanf("%d %d", &start, &end);
+    printf("Enter the initial position of the head: ");
     scanf("%d", &head);
-    printf("Enter number of request in queue : ");
-    scanf("%d", &request);
-    for(int i=0; i<request; i++){
-        isvisited[i]=0;
-    }
-    printf("Enter request queue : ");
-    for(int i=0; i<request; i++){
-        scanf("%d", &track[i]);
-    }
-
-    while(visited<request)
+    printf("Enter the request queue and (-1) to stop:\n");
+    while (1)
     {
-        int nearest = shortest(head,request);
-        printf("%d   ",track[nearest]);
-        totalTrackMovement+=abs(track[nearest]-head);
-        isvisited[nearest]=1;
-        visited++;
-        head=track[nearest];
+        printf("Request %d: ", requests + 1);
+        scanf("%d", &tracks[requests]);
+        if (tracks[requests] == -1 || requests == MAX_TRACKS - 1)
+        {
+            break;
+        }
+        requests++;
     }
-
-    printf("Total track movement: %d",totalTrackMovement);
+    sstf();
+    return 0;
 }

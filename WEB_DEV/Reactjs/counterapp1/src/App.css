@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.card {
+    text-align: center;
+}
+
+h1 {
+    color: orange;
+}
+
+.buttons {
+    margin: 2em;
+}

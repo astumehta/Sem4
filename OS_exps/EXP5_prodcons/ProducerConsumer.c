@@ -3,9 +3,12 @@
 
 int buffer[8];
 int buffer_size = 5;
+
 int full = 0;
 int empty = 5;
+
 int semaphore = 1;
+
 int in = -1;
 int out = 0;
 
