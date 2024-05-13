@@ -1,17 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-
+import React from "react";
+import { Navbar } from "./Components/Navbar";
+import { Home } from "./Components/Home";
 function App() {
   return (
     <>
-        
-        <h1>This is a iNoteBook</h1>
-      
+      <Navbar></Navbar>
+      <Home></Home>
+      <h1>This is a iNoteBook</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
