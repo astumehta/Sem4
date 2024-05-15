@@ -11,13 +11,15 @@ CODE SEGMENT
     MOV AX, DATA 
     MOV DS, AX 
     
-    MOV AX, N1 
+    MOV AX, N1          
     
     L1: 
         DEC N1 
         MUL N1 
+
         MOV CX, N1 
         CMP CX, 01H 
+        
         JNZ L1 
         MOV FACT, AX 
         

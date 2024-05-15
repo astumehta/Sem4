@@ -17,11 +17,11 @@ Adding:
     MOV DL, [SI]  ; Load the element into DL
     ADD AL, DL    ; Add DL (element) to AL (sum)
     INC SI        ; Move to the next element
-    LOOP Adding   ; Iterate same way for all elements in array
+    LOOP Adding   ; Repeat until all elements are summed up
 
     MOV CX, LEN
     DIV CL         ; Divide AX by the length of the array to get the average
-    MOV AVG, AL    ; Store the average in AVG
+    MOV AVG, AX    ; Store the average in AVG
 
     MOV AX, 4CH
     INT 21H

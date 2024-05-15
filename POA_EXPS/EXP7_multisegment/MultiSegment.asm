@@ -1,0 +1,31 @@
+DATA SEGMENT
+    SEG1 DB 1h,2h,3h
+DATA ENDS
+
+EXTRA SEGMENT
+    SEG2 DB ?
+EXTRA ENDS
+
+CODE SEGMENT 
+    START:
+    MOV AX,DATA
+    MOV DS,AX
+
+    MOV AX,EXTRA
+    MOV ES,AX
+
+    LEA SI,SEG1
+    LEA DI,SEG2
+
+    MOV CL,03h        
+    
+    X:MOV AL,DS:[SI]
+    MOV ES:[DI],AL
+    INC SI
+    INC DI
+    DEC CL
+    JNZ X 
+    MOV AH,4ch
+    INT 21h
+CODE ENDS
+END START
