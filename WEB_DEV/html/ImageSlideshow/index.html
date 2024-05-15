@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slideshow</title>
+</head>
+<body>
+
+
+  <img id="slideshow" src="" alt="Slideshow Image">
+  
+  <script>
+
+
+    var i = 0;
+    var images = ["a.jpg","b.jpg","c.jpg","d.jpg"]; 
+
+    function change() {
+      document.getElementById("slideshow").src = images[i];
+      if (i < images.length - 1) 
+      {
+        i++;
+      } 
+      else 
+      {
+        i = 0;
+      }
+      setTimeout(change, 3000);
+    }
+
+    window.onload = change;
+  </script>
+</body>
+</html>
