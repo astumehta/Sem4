@@ -31,7 +31,7 @@ if num1 < 0:
 binCompNum1 = twosComplement(binNum1)
 binCompNum1 = binCompNum1.zfill(maxlen)
 print(" A     Q     Q1     n")
-print(binNum1, binNum2, binCompNum1, 0)
+print(binNum1, binNum2, (binCompNum1)[-1], 0)
 
 count = maxlen
 m = binNum1
@@ -75,5 +75,3 @@ if minus:
     print(int(ans, 2) * -1)
 else:
     print(int(ans, 2))
-
-#follow this
