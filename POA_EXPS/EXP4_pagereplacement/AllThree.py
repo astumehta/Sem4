@@ -78,7 +78,6 @@ def optimal(frames, pages):
 #     print()
 
 def main():
-    print("Dev Pandey C1 - C034 60004220008")
     frames = []
     pages = []
     n = int(input("Enter the number of frames: "))
