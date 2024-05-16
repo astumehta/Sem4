@@ -23,6 +23,7 @@ maxlen += 1
 
 binNum1 = binNum1.zfill(maxlen)
 binNum2 = binNum2.zfill(maxlen)
+
 if num2 < 0:
     binNum2 = twosComplement(binNum2)
 if num1 < 0:
@@ -61,7 +62,7 @@ while count > 0:
     rightshift = merged[0]
     for i in range(len(merged) - 1):
         rightshift += merged[i]
-
+    print(a, q, q1, maxlen-count,"ARS A,Q,Q1")
     a = rightshift[:maxlen]
     q = rightshift[maxlen:maxlen * 2]
     q1 = rightshift[-1]

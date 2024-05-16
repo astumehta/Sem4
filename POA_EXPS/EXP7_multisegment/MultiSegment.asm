@@ -21,10 +21,12 @@ CODE SEGMENT
     
     X:MOV AL,DS:[SI]
     MOV ES:[DI],AL
+
     INC SI
     INC DI
     DEC CL
     JNZ X 
+    
     MOV AH,4ch
     INT 21h
 CODE ENDS

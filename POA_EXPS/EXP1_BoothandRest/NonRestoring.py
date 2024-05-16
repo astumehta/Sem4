@@ -57,7 +57,6 @@ while count > 0:
     a = leftshift[:maxlen + 1]
     q = leftshift[maxlen + 1:]
     count -= 1
-
     print(maxlen - count, a, q)
 
 if a[0] == "1":

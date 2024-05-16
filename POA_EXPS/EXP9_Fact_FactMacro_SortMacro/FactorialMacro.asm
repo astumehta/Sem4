@@ -1,7 +1,4 @@
-DATA SEGMENT
-    N1 DW 5H
-    FACT DW ?
-ENDS
+
         
 FACTO MACRO 
     MOV AX,N1
@@ -13,6 +10,10 @@ FACTO MACRO
     JNZ L1
 ENDM
 
+DATA SEGMENT
+    N1 DW 5H
+    FACT DW ?
+ENDS
     
 CODE SEGMENT 
     START:

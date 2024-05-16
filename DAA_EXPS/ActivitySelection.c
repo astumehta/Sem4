@@ -1,8 +1,4 @@
 
-
-
-// VERY EASYYY
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,12 +11,12 @@ void bubbleSortFinishTimes(int start[], int finish[], int n)
         {
             if (finish[j] > finish[j + 1])
             {
-                // Swap finish times
+                
                 int temp = finish[j];
                 finish[j] = finish[j + 1];
                 finish[j + 1] = temp;
 
-                // Swap start times accordingly
+                
                 temp = start[j];
                 start[j] = start[j + 1];
                 start[j + 1] = temp;
