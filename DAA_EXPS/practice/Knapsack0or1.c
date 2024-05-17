@@ -29,11 +29,13 @@ void knapsack()
         {
             tempStates[j].profit = states[j].profit + profit[i];
             tempStates[j].weight = states[j].weight + weight[i];
+
             for (int k = 0; k < n; k++)
             {
                 tempStates[j].objects[k] = states[j].objects[k];
             }
             tempStates[j].objects[i] = 1;
+            
             tempCount++;
         }
 

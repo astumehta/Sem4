@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-#define MAX 999
-
 int cost[5][5] = {
     {0, 4, 7, 9, 8},
     {4, 0, 1, 0, 0},
@@ -22,8 +20,9 @@ int main()
     visited[0] = 1;
     while (ne < n)
     {
-        int min = MAX;
-        int a = -1, b = -1;
+        int min = 999;
+        int a = -1;
+        int b = -1;
 
         for (int i = 0; i < n; i++)
         {

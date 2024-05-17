@@ -42,6 +42,19 @@ void bellmanFord(int n)
             }
         }
     }
+    for (int u = 0; u < n; u++)
+    {
+        for (int v = 0; v < n; v++)
+        {
+            if (w[u][v] != 0)
+            {
+                if (d[v] > d[u] + w[u][v])
+                {
+                    printf("The graph has a negative cycle\n");
+                }
+            }
+        }
+    }
 }
 
 int main()
