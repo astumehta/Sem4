@@ -1,0 +1,15 @@
+AcitivitySelection
+BellmanFord
+BinarySearch
+Djikstra
+Prims
+FloydWarshall
+InsertionSort
+GreedyKnapsack
+LCS
+Minmax
+MergeSort
+QuickSort
+Sumofsubset
+SelectionSort
+

@@ -16,7 +16,6 @@ void bubbleSortFinishTimes(int start[], int finish[], int n)
                 finish[j] = finish[j + 1];
                 finish[j + 1] = temp;
 
-                
                 temp = start[j];
                 start[j] = start[j + 1];
                 start[j + 1] = temp;

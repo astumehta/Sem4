@@ -1,3 +1,11 @@
+// {
+//         {0,4,7,9,8},
+//         {4,0,1,1000,1000},
+//         {7,1,0,2,1000},
+//         {9,1000,2,0,6},
+//         {8,1000,1000,6,0},
+// };
+
 #include <stdio.h>
 
 #define MAX_VERTICES 9
@@ -27,8 +35,9 @@ int uni(int i, int j)
 
 int main()
 {
-    int n, ne = 1, mincost = 0;
-    printf("\n\tImplementation of Kruskal's algorithm\n");
+    int n;
+    int ne = 1;
+    int mincost = 0;
     printf("\nEnter the no. of vertices:");
     scanf("%d", &n);
     printf("\nEnter the cost adjacency matrix:\n");
@@ -38,13 +47,16 @@ int main()
         {
             scanf("%d", &cost[i][j]);
             if (cost[i][j] == 0)
+            {
                 cost[i][j] = MAX;
+            }
         }
     }
     printf("The edges of Minimum Cost Spanning Tree are\n");
+    
     while (ne < n)
     {
-        int min = MAX;
+        int min = 999;
         int a, b;
         int u = -1;
         int v = -1;
@@ -67,7 +79,7 @@ int main()
             printf("%d edge (%d,%d) = %d\n", ne++, a, b, min);
             mincost += min;
         }
-        cost[a][b] = cost[b][a] = MAX;
+        cost[a][b] = cost[b][a] = 999;
     }
     printf("\n\tMinimum cost = %d\n", mincost);
     return 0;

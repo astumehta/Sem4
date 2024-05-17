@@ -2,7 +2,7 @@
 #include <stdbool.h>
 
 #define MAX 100
-#define OG 999
+#define INT_MAX 999
 
 int w[MAX][MAX];
 int d[MAX];
@@ -12,7 +12,7 @@ void initialize(int n)
 {
     for (int i = 0; i < n; i++)
     {
-        d[i] = OG;
+        d[i] = INT_MAX;
         parent[i] = -1;
     }
     d[0] = 0;

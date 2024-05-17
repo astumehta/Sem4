@@ -6,7 +6,9 @@
 
 int i, j, m, n;
 int c[20][20];
-char x[20], y[20], b[20][20];
+char b[20][20];
+char x[20];
+char y[20];
 
 void printLCS(int i, int j)
 {

@@ -9,6 +9,7 @@ void knapsack(){
     int i, j;
     int temp_count;
     int max_profit = 0;
+    
     temp_profits[0] = 0;
     temp_weights[0] = 0;
     count = 1;

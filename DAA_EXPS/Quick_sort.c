@@ -23,8 +23,10 @@ void quick_Sort(int low,int high)
 int partition(int low,int high)
 {
     int pivot=a[low];
+
     int start=low;
     int end=high;
+    
     while(start<end)
     {
         while(a[start]<=pivot)

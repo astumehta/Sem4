@@ -1,22 +1,24 @@
 #include <stdio.h>
 #include <string.h>
 
-char T[100], P[100];
+char Text[100];
+char Pattern[100];
 int pi[100];
 int m, n;
 
 void prefix()
 {
-    m = strlen(P);
-    pi[0] = pi[1] = 0;
+    m = strlen(Pattern);
+    pi[0] = 0;
+    pi[1] = 0;
     int k = 0;
     for (int q = 2; q <= m; q++)
     {
-        while (k > 0 && P[k] != P[q - 1])
+        while (k > 0 && Pattern[k] != Pattern[q - 1])
         {
             k = pi[k];
         }
-        if (P[k] == P[q - 1])
+        if (Pattern[k] == Pattern[q - 1])
         {
             k = k + 1;
         }
@@ -32,16 +34,16 @@ void prefix()
 
 void KMP()
 {
-    n = strlen(T);
-    m = strlen(P);
+    n = strlen(Text);
+    m = strlen(Pattern);
     int q = 0;
     for (int i = 0; i < n; i++)
     {
-        while (q > 0 && P[q] != T[i])
+        while (q > 0 && Pattern[q] != Text[i])
         {
             q = pi[q];
         }
-        if (P[q] == T[i])
+        if (Pattern[q] == Text[i])
         {
             q = q + 1;
         }
@@ -56,9 +58,9 @@ void KMP()
 int main()
 {
     printf("Enter text: ");
-    scanf("%s", T);
+    scanf("%s", Text);
     printf("Enter pattern: ");
-    scanf("%s", P);
+    scanf("%s", Pattern);
     prefix();
     KMP();
     return 0;

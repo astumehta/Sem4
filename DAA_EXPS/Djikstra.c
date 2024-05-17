@@ -10,8 +10,8 @@ int min(int d[], int visited[])
     {
         if (visited[i] == 0 && d[i] < min)
         {
-            minIndex = i;
             min = d[i];
+            minIndex = i;
         }
     }
     return minIndex;
@@ -23,8 +23,8 @@ void dijkstra(int w[SIZE][SIZE])
     int d[SIZE];
     for (int i = 0; i < SIZE; i++)
     {
-        visited[i] = 0;
         d[i] = INT_MAX;
+        visited[i] = 0;
     }
     d[0] = 0;
     parent[0] = -1;

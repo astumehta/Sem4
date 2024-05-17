@@ -2,7 +2,6 @@
 #include <string.h>
 
 #define d 256
-
 void search(char pat[], char txt[], int q)
 {
     int M = strlen(pat);
@@ -19,14 +18,14 @@ void search(char pat[], char txt[], int q)
 
     for (i = 0; i < M - 1; i++)
     {
-        h = (h * d) % q;
+        h = (h * 256) % q;
     }
 
     // MAIN
     for (i = 0; i < M; i++)
     {
-        p = (d * p + pat[i]) % q;
-        t = (d * t + txt[i]) % q;
+        p = (256 * p + pat[i]) % q;
+        t = (256 * t + txt[i]) % q;
     }
     
     for (i = 0; i <= N - M; i++)
@@ -48,7 +47,7 @@ void search(char pat[], char txt[], int q)
         
         if (i < N - M)
         {
-            t = (d * (t - txt[i] * h) + txt[i + M]) % q;
+            t = (256 * (t - txt[i] * h) + txt[i + M]) % q;
             if (t < 0)
             {
                 t = (t + q);
