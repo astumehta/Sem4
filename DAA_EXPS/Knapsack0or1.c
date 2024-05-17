@@ -1,48 +1,50 @@
-#include <stdio.h>
+#include<stdio.h>
+#define MAX 100
 
-#define MAX_W 100
-#define MAX_N 100
+int num_items, max_weight, count;
+int profits[MAX], weights[MAX];
+int temp_profits[MAX], temp_weights[MAX];
 
-float knapsack_fractional(int W, int wt[], int val[], int n)
-{
-    float dp[MAX_W + 1][MAX_N + 1];
-    for (int i = 0; i <= W; i++)
-    {
-        dp[i][0] = 0.0;
-    }
-    for (int i = 0; i <= n; i++)
-    {
-        dp[0][i] = 0.0;
-    }
-
-    for (int i = 1; i <= W; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-            if (wt[j - 1] > i)
-            {
-                dp[i][j] = dp[i][j - 1];
-            }
-            else
-            {
-                float include = val[j - 1] + dp[i - wt[j - 1]][j - 1];
-                float exclude = dp[i][j - 1];
-                dp[i][j] = (include > exclude) ? include : exclude;
+void knapsack(){
+    int i, j;
+    int temp_count;
+    int max_profit = 0;
+    temp_profits[0] = 0;
+    temp_weights[0] = 0;
+    count = 1;
+    for(i = 0; i < num_items; i++){
+        temp_count = 0;
+        for(j = 0; j < count; j++){
+            temp_profits[temp_count] = temp_profits[j] + profits[i];
+            temp_weights[temp_count] = temp_weights[j] + weights[i];
+            temp_count++;
+        }
+        for(j = 0; j < temp_count; j++){
+            if(temp_weights[j] <= max_weight){
+                temp_profits[count] = temp_profits[j];
+                temp_weights[count] = temp_weights[j];
+                count++;
             }
         }
     }
-    return dp[W][n];
+    for (i = 0; i < count; i++) {
+        if (temp_profits[i] > max_profit && temp_weights[i] <= max_weight) {
+            max_profit = temp_profits[i];
+        }
+    }
+    printf("Maximum Profit: %d\n", max_profit);
 }
 
-int main()
-{
-    int val[] = {1, 2, 5, 6};             
-    int wt[] = {2, 3, 4, 5};              
-    int W = 8;                            
-    int n = sizeof(val) / sizeof(val[0]); 
-
-    float max_profit = knapsack_fractional(W, wt, val, n);
-    printf("Maximum value that can be obtained: %.2f\n", max_profit);
-
+int main() {
+    int i;
+    printf("Enter number of items:\n");
+    scanf("%d", &num_items);
+    printf("Enter weight and profit for each item:\n");
+    for (i = 0; i < num_items; i++) {
+        scanf("%d %d", &weights[i], &profits[i]);
+    }
+    printf("Enter maximum weight capacity:\n");
+    scanf("%d", &max_weight);
+    knapsack();
     return 0;
 }
