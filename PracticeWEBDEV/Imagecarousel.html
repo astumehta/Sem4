@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Carousel</title>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .image-container {
+      margin-bottom: 20px;
+    }
+    img {
+      width: 500px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      font-size: large;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="image-container">
+      <img id="image" src="a.jpg">
+    </div>
+    <div class="buttons">
+      <button id="left">Left</button>
+      <button id="right">Right</button>
+    </div>
+  </div>
+
+  <script>
+    const image = document.getElementById('image');
+    const array = ['a.jpg', 'b.jpg', 'c.jpg'];
+
+    function changeImage(d) {
+      let i = array.indexOf(image.src.split('/').pop());
+      const j = (i + d + array.length) % array.length;
+      image.src = array[j];
+    }
+    document.getElementById('right').addEventListener('click', () => changeImage(1)); 
+    document.getElementById('left').addEventListener('click', () => changeImage(-1)); 
+  </script>
+</body>
+</html>

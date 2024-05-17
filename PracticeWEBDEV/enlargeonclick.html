@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Resize</title>
+  <style>
+    .half-size {
+      width: 50%;
+      height: 50%;
+    }
+  </style>
+</head>
+<body>
+  <img id="myImage" src="a.jpg" alt="Image">
+  <button onclick="changeSize()">Change Size</button>
+
+  <script>
+    function changeSize() {
+      var image = document.getElementById("myImage");
+      image.classList.toggle('half-size');
+    }
+  </script>
+</body>
+</html>

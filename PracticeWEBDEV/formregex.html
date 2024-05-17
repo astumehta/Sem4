@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="fields">
+                <label for="name" class="name">Name:</label>
+                <input type="text" id="name">
+            </div>
+            <div class="fields">
+                <label for="sapid" class="sapid">SAPID:</label>
+                <input type="text" id="sapid">
+            </div>
+            <div class="fields">
+                <label for="email" class="email">Email:</label>
+                <input type="text" id="email">
+            </div>
+            <div class="fields">
+                <label for="password" class="password">Password:</label>
+                <input type="text" id="password">
+            </div>
+            <div class="fields">
+                <label for="pno" class="pno">Pno:</label>
+                <input type="text" id="pno">
+            </div>
+
+            
+
+            <input type="button" value="Submit" onclick="return Validate()"/>
+            
+            <div class="msg" id="msg"></div>
+        </form>
+    </div>
+    <script>
+    function Validate()
+    {
+        var name=document.getElementById("name").value.trim();
+
+        var msg=document.getElementById("msg");
+
+        var emailpattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        var passpattern=/^(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+
+        var error='';
+
+        if(name==='')
+        {
+            error+="Enter valid name";
+        }
+
+        if (error !== "") {
+    alert(error);
+    return false;
+    
+  } else {
+    msg.innerHTML = "FORM SUBMITTED";
+    
+    return true;
+    
+  }
+}
+    </script>
+</body>
+</html>
